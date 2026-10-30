@@ -1,2 +1,2 @@
-# spotspector-frontend
-React + TypeScript + Other  frontend for SpotSpector
+# Spotspector:
+Music Streaming Web APP Frontend(React) + Backend(Django)
