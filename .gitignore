@@ -189,3 +189,4 @@ db.sqlite3-journal
 .idea/
 *.swp
 *.swo
+.DS_Store
