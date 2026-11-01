@@ -17,6 +17,9 @@ services:
     volumes:
       - static_files:/app/staticfiles
 
+    env_file:
+      - .env.compose
+
     environment:
       - SECRET_KEY
       - ALLOWED_HOSTS
