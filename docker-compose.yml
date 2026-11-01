@@ -39,7 +39,7 @@ services:
 
     depends_on:
       - api
-      - react
+      # - react
 
     ports:
       - 80:80
@@ -48,17 +48,17 @@ services:
       - ./conf.d:/etc/nginx/conf.d
       - static_files:/app/staticfiles
 
-  react:
-    container_name: react
+  # react:
+  #   container_name: react
 
-    build:
-      context: .
-      dockerfile: frontend/Dockerfile
+  #   build:
+  #     context: .
+  #     dockerfile: frontend/Dockerfile
 
-    restart: unless-stopped
+  #   restart: unless-stopped
 
-    expose:
-      - 3000
+  #   expose:
+  #     - 3000
 
   db:
     image: postgres:18.4
