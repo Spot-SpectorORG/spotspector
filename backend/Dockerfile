@@ -10,9 +10,10 @@ WORKDIR /app/
 RUN apt-get update && apt-get install -y --no-install-recommends \
     gcc \
     libpq-dev \
+    gosu \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-COPY requirements.txt .
+COPY backend/requirements.txt .
 
 RUN pip install -r requirements.txt
 
