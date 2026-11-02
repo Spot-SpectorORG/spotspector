@@ -72,9 +72,9 @@ ASGI_APPLICATION = "config.asgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": config("DB_NAME", default="modelhub"),
-        "USER": config("DB_USER", default="postgres"),
-        "PASSWORD": config("DB_PASS", default="password"),
+        "NAME": config("POSTGRES_DB", default="database"),
+        "USER": config("POSTGRES_USER", default="postgres"),
+        "PASSWORD": config("POSTGRES_PASSWORD", default="password"),
         "HOST": config("DB_HOST", default="localhost"),
         "PORT": config("DB_PORT", default="5432"),
         "ATOMIC_REQUESTS": True,
