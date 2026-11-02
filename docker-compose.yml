@@ -20,17 +20,6 @@ services:
     env_file:
       - .env.compose
 
-    environment:
-      - SECRET_KEY
-      - ALLOWED_HOSTS
-      - CSRF_TRUSTED_ORIGINS
-      - DB_NAME
-      - DB_USER
-      - DB_PASS
-      - DB_HOST
-      - DB_PORT
-      - DEBUG=False
-
     command: gunicorn config.wsgi:application --bind 0.0.0.0:8000 --timeout 60 --workers 3
 
   nginx:
@@ -42,7 +31,7 @@ services:
 
     depends_on:
       - api
-      # - react
+      - react
 
     ports:
       - 80:80
@@ -51,17 +40,17 @@ services:
       - ./conf.d:/etc/nginx/conf.d
       - static_files:/app/staticfiles
 
-  # react:
-  #   container_name: react
+  react:
+    container_name: react
 
-  #   build:
-  #     context: .
-  #     dockerfile: frontend/Dockerfile
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
 
-  #   restart: unless-stopped
+    restart: unless-stopped
 
-  #   expose:
-  #     - 3000
+    expose:
+      - 5134
 
   db:
     image: postgres:18.4
@@ -73,10 +62,8 @@ services:
     volumes:
       - data:/var/lib/postgresql
 
-    environment:
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_DB=${DB_NAME}
-      - POSTGRES_PASSWORD=${DB_PASS}
+    env_file:
+      - .env.compose
 
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -d $$POSTGRES_DB -U $$POSTGRES_USER" ]
