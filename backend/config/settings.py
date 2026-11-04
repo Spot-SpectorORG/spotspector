@@ -29,7 +29,7 @@ THIRD_PATY_APPS = [
     "django_filters",
 ]
 
-LOCAL_APPS = ["apps.users"]
+LOCAL_APPS = ["apps.users", "apps.music"]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PATY_APPS + LOCAL_APPS
 
@@ -199,4 +199,4 @@ SPECTACULAR_SETTINGS = {
     },
 }
 
-AUTH_USER_MODEL = "users.CustomUser"
+AUTH_USER_MODEL = "users.User"

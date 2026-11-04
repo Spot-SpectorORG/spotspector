@@ -8,9 +8,9 @@ app_name = "users"
 
 urlpatterns = [
     path(
-        "users/register/",
+        "register/",
         RegisterView.as_view(),
         name="agent-metrics-resource-history",
     ),
-    path("users/login/", TokenObtainPairView.as_view(), name="login"),
+    path("login/", TokenObtainPairView.as_view(), name="login"),
 ]
