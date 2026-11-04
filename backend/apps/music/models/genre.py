@@ -5,7 +5,7 @@ class Genre(models.Model):
     name = models.CharField(max_length=50, verbose_name="Name of genre")
 
     description = models.TextField(
-        max_length=1000, blank=True, null=True, verbose_name="Description for genre"
+        max_length=1000, blank=True, null=True, verbose_name="Description of genre"
     )
 
     class Meta:

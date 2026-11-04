@@ -29,6 +29,10 @@ class Track(models.Model):
         default=0, verbose_name="Track plays", blank=True
     )
 
+    track_position = models.PositiveSmallIntegerField(
+        default=1, verbose_name="Track position"
+    )
+
     class Meta:
         verbose_name = "Track"
         verbose_name_plural = "Tracks"
