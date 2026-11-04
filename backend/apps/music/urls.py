@@ -1,0 +1,26 @@
+from django.urls import path
+
+from apps.music.api.views.artist import ArtistDetailView, ArtistListView
+from apps.music.api.views.genre import GenreListView
+from apps.music.api.views.album import AlbumDetailView, AlbumListView
+from apps.music.api.views.track import TrackListView, TrackDetailView
+from apps.music.api.views.playlist import PlaylistDetailView, PlaylistListView
+
+app_name = "music"
+
+urlpatterns = [
+    # Artists
+    path("artists/", ArtistListView.as_view(), name="artists-list"),
+    path("artists/<int:pk>/", ArtistDetailView.as_view(), name="artist-detail"),
+    # Albums
+    path("albums/", AlbumListView.as_view(), name="albums-list"),
+    path("albums/<int:pk>/", AlbumDetailView.as_view(), name="album-detail"),
+    # Tracks
+    path("tracks/", TrackListView.as_view(), name="tracks-list"),
+    path("tracks/<int:pk>/", TrackDetailView.as_view(), name="track-detail"),
+    # Genres
+    path("genres/", GenreListView.as_view(), name="genres-list"),
+    # Playlists
+    path("playlists/", PlaylistListView.as_view(), name="playlists-list"),
+    path("playlists/<int:pk>/", PlaylistDetailView.as_view(), name="playlists-detail"),
+]
