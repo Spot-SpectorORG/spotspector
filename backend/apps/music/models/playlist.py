@@ -1,12 +1,20 @@
-from random import choice
-
 from django.db import models
+
+from utils.models import generate_short_uuid
 
 
 class Playlist(models.Model):
     class Status(models.TextChoices):
         PUBLIC = "Public"
         PRIVATE = "Private"
+
+    public_id = models.CharField(
+        max_length=10,
+        default=generate_short_uuid,
+        unique=True,
+        db_index=True,
+        editable=False,
+    )
 
     owner = models.ForeignKey(
         "users.User",

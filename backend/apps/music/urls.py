@@ -11,16 +11,24 @@ app_name = "music"
 urlpatterns = [
     # Artists
     path("artists/", ArtistListView.as_view(), name="artists-list"),
-    path("artists/<int:pk>/", ArtistDetailView.as_view(), name="artist-detail"),
+    path(
+        "artists/<str:public_id>/",
+        ArtistDetailView.as_view(),
+        name="artist-detail",
+    ),
     # Albums
     path("albums/", AlbumListView.as_view(), name="albums-list"),
-    path("albums/<int:pk>/", AlbumDetailView.as_view(), name="album-detail"),
+    path("albums/<str:public_id>/", AlbumDetailView.as_view(), name="album-detail"),
     # Tracks
     path("tracks/", TrackListView.as_view(), name="tracks-list"),
-    path("tracks/<int:pk>/", TrackDetailView.as_view(), name="track-detail"),
+    path("tracks/<str:public_id>/", TrackDetailView.as_view(), name="track-detail"),
     # Genres
     path("genres/", GenreListView.as_view(), name="genres-list"),
     # Playlists
     path("playlists/", PlaylistListView.as_view(), name="playlists-list"),
-    path("playlists/<int:pk>/", PlaylistDetailView.as_view(), name="playlists-detail"),
+    path(
+        "playlists/<str:public_id>/",
+        PlaylistDetailView.as_view(),
+        name="playlists-detail",
+    ),
 ]

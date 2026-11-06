@@ -3,8 +3,6 @@ from rest_framework import serializers
 from apps.music.models.track import Track
 from apps.music.models.artist import Artist
 
-from apps.music.api.serializers.genre import GenreTypeSerializer
-
 from apps.music.api.serializers.auxiliary_serializers import (
     AlbumShortInfoSerializer,
     ArtistNameSerializer,
@@ -18,7 +16,7 @@ class TrackListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Track
         fields = [
-            "id",
+            "public_id",
             "title",
             "artists",
             "album",
@@ -35,7 +33,7 @@ class TrackCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Track
         fields = [
-            "id",
+            "public_id",
             "title",
             "artists",
             "album",
@@ -52,7 +50,7 @@ class TrackDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Track
         fields = [
-            "id",
+            "public_id",
             "title",
             "artists",
             "album",

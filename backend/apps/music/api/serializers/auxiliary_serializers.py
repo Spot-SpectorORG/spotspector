@@ -7,10 +7,10 @@ from apps.music.models.artist import Artist
 class ArtistNameSerializer(serializers.ModelSerializer):
     class Meta:
         model = Artist
-        fields = ["id", "name"]
+        fields = ["public_id", "name"]
 
 
 class AlbumShortInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Album
-        fields = ["id", "title", "release_date"]
+        fields = ["public_id", "title", "release_date"]

@@ -38,3 +38,5 @@ class ArtistDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Artist.objects.all()
 
     serializer_class = ArtistDetailSerializer
+
+    slug_field = "public_id"

@@ -15,7 +15,7 @@ from apps.music.api.serializers.album import (
 
 
 class AlbumListView(generics.ListCreateAPIView):
-    queryset = Album.objects.all().order_by("-pk")
+    queryset = Album.objects.all()
 
     filter_backends = [
         DjangoFilterBackend,
@@ -37,3 +37,5 @@ class AlbumListView(generics.ListCreateAPIView):
 class AlbumDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Album.objects.all().prefetch_related("artists")
     serializer_class = AlbumDetailSerializer
+
+    slug_field = "public_id"
