@@ -1,7 +1,17 @@
 from django.db import models
 
+from utils.models import generate_short_uuid
+
 
 class Genre(models.Model):
+    public_id = models.CharField(
+        max_length=10,
+        default=generate_short_uuid,
+        unique=True,
+        db_index=True,
+        editable=False,
+    )
+
     name = models.CharField(max_length=50, verbose_name="Name of genre")
 
     description = models.TextField(

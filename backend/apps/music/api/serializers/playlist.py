@@ -7,7 +7,6 @@ from apps.music.models import Genre
 from apps.music.api.serializers.genre import GenreTypeSerializer
 from apps.music.api.serializers.auxiliary_serializers import ArtistNameSerializer
 
-
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -18,13 +17,13 @@ class TrackInfoInsidePlaylistSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Track
-        fields = ["id", "title", "duration", "artists"]
+        fields = ["public_id", "title", "duration", "artists"]
 
 
 class PlaylistUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["id", "username"]
+        fields = ["public_id", "username"]
 
 
 class PlaylistListSerializer(serializers.ModelSerializer):
@@ -36,7 +35,7 @@ class PlaylistListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Playlist
         fields = [
-            "id",
+            "public_id",
             "title",
             "description",
             "owner",
@@ -65,7 +64,7 @@ class PlaylistCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Playlist
         fields = [
-            "id",
+            "public_id",
             "title",
             "description",
             "owner",

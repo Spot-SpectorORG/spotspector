@@ -1,7 +1,19 @@
 from django.db import models
 
+from utils.models import generate_short_uuid
+
 
 class Track(models.Model):
+    id = models.BigAutoField(primary_key=True)
+
+    public_id = models.CharField(
+        max_length=10,
+        default=generate_short_uuid,
+        unique=True,
+        db_index=True,
+        editable=False,
+    )
+
     title = models.CharField(max_length=100, verbose_name="Title of track")
 
     album = models.ForeignKey(

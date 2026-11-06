@@ -2,8 +2,18 @@ from django.contrib.auth.models import AbstractUser
 
 from django.db import models
 
+from utils.models import generate_short_uuid
+
 
 class User(AbstractUser):
+    public_id = models.CharField(
+        max_length=10,
+        default=generate_short_uuid,
+        unique=True,
+        db_index=True,
+        editable=False,
+    )
+
     username = models.CharField(
         max_length=20,
         unique=True,

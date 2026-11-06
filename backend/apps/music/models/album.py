@@ -1,7 +1,17 @@
 from django.db import models
 
+from utils.models import generate_short_uuid
+
 
 class Album(models.Model):
+    public_id = models.CharField(
+        max_length=10,
+        default=generate_short_uuid,
+        unique=True,
+        db_index=True,
+        editable=False,
+    )
+
     title = models.CharField(max_length=100, blank=False, verbose_name="Title of album")
 
     artists = models.ManyToManyField(

@@ -200,3 +200,6 @@ SPECTACULAR_SETTINGS = {
 }
 
 AUTH_USER_MODEL = "users.User"
+
+# django-hashid
+DJANGO_HASHIDS_SALT = SECRET_KEY
