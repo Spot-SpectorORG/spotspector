@@ -1,3 +1,5 @@
+from drf_spectacular.utils import extend_schema
+
 from rest_framework import generics, status
 
 from rest_framework.filters import OrderingFilter, SearchFilter
@@ -13,7 +15,10 @@ from apps.music.api.serializers.album import (
     AlbumDetailSerializer,
 )
 
+from apps.music.api.pagination.album import AlbumListPagination
 
+
+@extend_schema(tags=["Music Catalog - Albums"])
 class AlbumListView(generics.ListCreateAPIView):
     queryset = Album.objects.all()
 
@@ -34,6 +39,7 @@ class AlbumListView(generics.ListCreateAPIView):
         return AlbumListSerializer
 
 
+@extend_schema(tags=["Music Catalog - Albums"])
 class AlbumDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Album.objects.all().prefetch_related("artists")
     serializer_class = AlbumDetailSerializer

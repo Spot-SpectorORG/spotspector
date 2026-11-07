@@ -1,3 +1,5 @@
+from drf_spectacular.utils import extend_schema
+
 from rest_framework import generics, status
 
 from rest_framework.filters import OrderingFilter, SearchFilter
@@ -12,7 +14,10 @@ from apps.music.api.serializers.playlist import (
     PlaylistDetailSerializer,
 )
 
+from apps.music.api.pagination.playlist import PlaylistListPagination
 
+
+@extend_schema(tags=["User Playlists & Libraries"])
 class PlaylistListView(generics.ListCreateAPIView):
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
 
@@ -23,6 +28,7 @@ class PlaylistListView(generics.ListCreateAPIView):
     def get_serializer_class(self):
         if self.request.method == "POST":
             return PlaylistCreateSerializer
+
         return PlaylistDetailSerializer
 
     def get_queryset(self):
@@ -39,6 +45,7 @@ class PlaylistListView(generics.ListCreateAPIView):
         return queryset
 
 
+@extend_schema(tags=["User Playlists & Libraries"])
 class PlaylistDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Playlist.objects.all()
 
