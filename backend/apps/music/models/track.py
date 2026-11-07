@@ -25,16 +25,22 @@ class Track(models.Model):
         verbose_name="Track album",
     )
 
-    release_date = models.DateField(verbose_name="Date of release")
+    release_date = models.DateField(verbose_name="Date of release", blank=False)
 
     genres = models.ManyToManyField(
-        to="music.Genre", related_name="tracks", verbose_name="Track genres"
+        to="music.Genre",
+        related_name="tracks",
+        verbose_name="Track genres",
+        blank=False,
     )
 
-    duration = models.DurationField(verbose_name="Duration of track")
+    duration = models.DurationField(verbose_name="Duration of track", blank=False)
 
     artists = models.ManyToManyField(
-        to="music.Artist", related_name="tracks", verbose_name="Track artists"
+        to="music.Artist",
+        related_name="tracks",
+        verbose_name="Track artists",
+        blank=False,
     )
 
     plays_count = models.PositiveIntegerField(
@@ -42,7 +48,7 @@ class Track(models.Model):
     )
 
     track_position = models.PositiveSmallIntegerField(
-        default=1, verbose_name="Track position"
+        default=1, verbose_name="Track position", blank=False
     )
 
     class Meta:

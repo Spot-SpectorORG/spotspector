@@ -22,6 +22,7 @@ class Artist(models.Model):
         to="music.Genre",
         related_name="artists",
         verbose_name="Artist's genres",
+        blank=False,
     )
 
     class Meta:

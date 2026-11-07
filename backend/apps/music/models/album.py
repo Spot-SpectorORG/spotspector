@@ -15,10 +15,13 @@ class Album(models.Model):
     title = models.CharField(max_length=100, blank=False, verbose_name="Title of album")
 
     artists = models.ManyToManyField(
-        to="music.Artist", related_name="albums", verbose_name="Artists of album"
+        to="music.Artist",
+        related_name="albums",
+        verbose_name="Artists of album",
+        blank=False,
     )
 
-    release_date = models.DateField(verbose_name="Date of release")
+    release_date = models.DateField(verbose_name="Date of release", blank=False)
 
     class Meta:
         verbose_name = "Album"
