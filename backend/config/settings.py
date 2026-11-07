@@ -123,6 +123,7 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework_simplejwt.authentication.JWTAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
     ],
     "DEFAULT_THROTTLE_CLASSES": [
         "rest_framework.throttling.AnonRateThrottle",  # only for anonim users
@@ -189,13 +190,26 @@ SPECTACULAR_SETTINGS = {
     "DESCRIPTION": "Docs of backend",
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
-    "SECURITYDEFINITIONS": {
-        "Bearer": {
-            "type": "apiKey",
-            "name": "Authorization",
-            "in": "header",
-            "description": "Enter token in format: Bearer <your_access_token>",
+    "COMPONENT_SPLIT_PATCH": True,
+    "SECURITY": [
+        {
+            "BearerAuth": [],
         }
+    ],
+    "APPEND_COMPONENTS": {
+        "securitySchemes": {
+            "BearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT",
+                "description": "Enter your JWT Access token here (WITHOUT typing 'Bearer' prefix)",
+            }
+        }
+    },
+    "SWAGGER_UI_SETTINGS": {
+        "operationsSorter": "method",
+        "tagsSorter": "alpha",
+        "docExpansion": "list",
     },
 }
 

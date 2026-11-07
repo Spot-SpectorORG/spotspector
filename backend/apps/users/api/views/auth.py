@@ -3,6 +3,8 @@ from apps.users.api.serializers.auth import (
     RegisterResponseSerializer,
 )
 
+from rest_framework_simplejwt.views import TokenObtainPairView
+
 from drf_spectacular.utils import extend_schema
 
 from rest_framework.permissions import AllowAny
@@ -14,7 +16,13 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import generics, status
 
 
-class RegisterView(generics.CreateAPIView):
+@extend_schema(tags=["User Management & Profiles"])
+class UserLoginView(TokenObtainPairView):
+    pass
+
+
+@extend_schema(tags=["User Management & Profiles"])
+class UserRegisterView(generics.CreateAPIView):
     """Takes a set of user credentials and create a new user"""
 
     permission_classes = [AllowAny]

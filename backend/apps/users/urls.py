@@ -1,16 +1,19 @@
 from django.urls import path
 
-from apps.users.api.views.auth import RegisterView
+from apps.users.api.views.auth import UserLoginView, UserRegisterView
 
-from rest_framework_simplejwt.views import TokenObtainPairView
+from apps.users.api.views.user import MeProfileView, UserListView, UserDetailView
 
 app_name = "users"
 
 urlpatterns = [
     path(
         "register/",
-        RegisterView.as_view(),
-        name="agent-metrics-resource-history",
+        UserRegisterView.as_view(),
+        name="register",
     ),
-    path("login/", TokenObtainPairView.as_view(), name="login"),
+    path("login/", UserLoginView.as_view(), name="login"),
+    path("me/", MeProfileView.as_view(), name="user-profile"),
+    path("", UserListView.as_view(), name="users-list"),
+    path("<str:public_id>/", UserDetailView.as_view(), name="user-detail"),
 ]

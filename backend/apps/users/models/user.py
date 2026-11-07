@@ -21,21 +21,25 @@ class User(AbstractUser):
     email = models.EmailField(blank=False, verbose_name="User email")
 
     liked_tracks = models.ManyToManyField(
-        "music.Track", related_name="liked_users", verbose_name="Tracks liked by user"
+        "music.Track",
+        related_name="liked_users",
+        verbose_name="Tracks liked by user",
+        blank=True,
     )
 
     followed_artists = models.ManyToManyField(
         "music.Artist",
         related_name="followed_users",
         verbose_name="Artists followed by user",
+        blank=True,
     )
 
     friends = models.ManyToManyField(
         to="self",
         symmetrical=False,
-        blank=True,
         related_name="friended_by",
         verbose_name="User friends",
+        blank=True,
     )
 
     class Meta:
