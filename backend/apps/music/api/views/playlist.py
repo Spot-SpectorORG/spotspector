@@ -12,9 +12,15 @@ from apps.music.models.playlist import Playlist
 from apps.music.api.serializers.playlist import (
     PlaylistCreateSerializer,
     PlaylistDetailSerializer,
+    PlaylistListSerializer,
 )
 
 from apps.music.api.pagination.playlist import PlaylistListPagination
+
+from apps.music.selectors.playlist import (
+    get_playlists_by_owner,
+    get_playlist_by_permission,
+)
 
 
 @extend_schema(tags=["User Playlists & Libraries"])
@@ -29,20 +35,13 @@ class PlaylistListView(generics.ListCreateAPIView):
         if self.request.method == "POST":
             return PlaylistCreateSerializer
 
-        return PlaylistDetailSerializer
+        return PlaylistListSerializer
 
     def get_queryset(self):
         user = self.request.user
-        queryset = Playlist.objects.all()
-
         owner_id = self.request.query_params.get("owner_id")
-        if owner_id is not None:
-            if not user.is_authenticated or str(user.id) != str(owner_id):
-                queryset = queryset.filter(visibility=Playlist.Status.PUBLIC)
-        else:
-            queryset = queryset.filter(visibility=Playlist.Status.PUBLIC)
 
-        return queryset
+        return get_playlists_by_owner(user, owner_id)
 
 
 @extend_schema(tags=["User Playlists & Libraries"])
@@ -54,16 +53,11 @@ class PlaylistDetailView(generics.RetrieveUpdateDestroyAPIView):
     def get_serializer_class(self):
         if self.request.method in ["PUT", "PATCH"]:
             return PlaylistCreateSerializer
+
         return PlaylistDetailSerializer
 
     def get_object(self):
         playlist = super().get_object()
         user = self.request.user
 
-        if playlist.visibility == Playlist.Status.PRIVATE:
-            if not user.is_authenticated or (
-                playlist.owner != user and user not in playlist.collaborators.all()
-            ):
-                raise exceptions.PermissionDenied("This playlist is private.")
-
-        return playlist
+        return get_playlist_by_permission(user, playlist)
