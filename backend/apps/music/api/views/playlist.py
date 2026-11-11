@@ -49,7 +49,7 @@ class PlaylistListView(generics.ListCreateAPIView):
 class PlaylistDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Playlist.objects.all()
 
-    slug_field = "public_id"
+    lookup_field = "public_id"
 
     def get_serializer_class(self):
         if self.request.method in ["PUT", "PATCH"]:

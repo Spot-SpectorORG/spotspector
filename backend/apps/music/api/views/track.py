@@ -45,4 +45,4 @@ class TrackDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     serializer_class = TrackDetailSerializer
 
-    slug_field = "public_id"
+    lookup_field = "public_id"
