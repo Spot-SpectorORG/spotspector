@@ -21,7 +21,7 @@ class TrackListSerializer(serializers.ModelSerializer):
             "artists",
             "album",
             "plays_count",
-            "duration",
+            "duration_ms",
         ]
 
 
@@ -38,7 +38,6 @@ class TrackCreateSerializer(serializers.ModelSerializer):
             "artists",
             "album",
             "genres",
-            "duration",
             "release_date",
         ]
 
@@ -57,9 +56,9 @@ class TrackDetailSerializer(serializers.ModelSerializer):
             "genres",
             "plays_count",
             "track_position",
-            "duration",
+            "duration_ms",
         ]
-        read_only_fields = ["duration", "plays_count"]
+        read_only_fields = ["duration_ms", "plays_count"]
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)

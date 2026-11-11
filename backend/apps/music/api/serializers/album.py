@@ -34,7 +34,7 @@ class TrackInfoInsideAlbumSerializer(serializers.ModelSerializer):
         fields = [
             "public_id",
             "title",
-            "duration",
+            "duration_ms",
             "plays_count",
             "genres",
             "track_position",
