@@ -17,7 +17,7 @@ class TrackInfoInsidePlaylistSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Track
-        fields = ["public_id", "title", "duration", "artists"]
+        fields = ["public_id", "title", "duration_ms", "artists"]
 
 
 class PlaylistUserSerializer(serializers.ModelSerializer):
@@ -44,7 +44,6 @@ class PlaylistListSerializer(serializers.ModelSerializer):
             "tracks",
             "visibility",
             "saves_count",
-            "duration",
         ]
 
 
@@ -84,7 +83,7 @@ class PlaylistDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Playlist
         fields = [
-            "id",
+            "public_id",
             "title",
             "description",
             "owner",

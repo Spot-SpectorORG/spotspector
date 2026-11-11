@@ -1,6 +1,7 @@
 from django.db import models
 
-from utils.models import generate_short_uuid
+
+from utils.models import generate_short_uuid, track_audio_upload_to
 
 
 class Track(models.Model):
@@ -10,7 +11,6 @@ class Track(models.Model):
         max_length=10,
         default=generate_short_uuid,
         unique=True,
-        db_index=True,
         editable=False,
     )
 
@@ -34,7 +34,9 @@ class Track(models.Model):
         blank=False,
     )
 
-    duration = models.DurationField(verbose_name="Duration of track", blank=False)
+    duration_ms = models.PositiveIntegerField(
+        verbose_name="Duration of track", blank=True, null=True
+    )
 
     artists = models.ManyToManyField(
         to="music.Artist",
@@ -49,6 +51,10 @@ class Track(models.Model):
 
     track_position = models.PositiveSmallIntegerField(
         default=1, verbose_name="Track position", blank=False
+    )
+
+    audio_file = models.FileField(
+        upload_to=track_audio_upload_to, max_length=512, null=True
     )
 
     class Meta:

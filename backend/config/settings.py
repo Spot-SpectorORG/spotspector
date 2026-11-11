@@ -11,8 +11,6 @@ DEBUG = config("DEBUG", default=False, cast=bool)
 ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="").split(",")
 
 DJANGO_APPS = [
-    "daphne",
-    "channels",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -21,7 +19,10 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
 ]
 
-THIRD_PATY_APPS = [
+THIRD_PARTY_APPS = [
+    "storages",
+    "daphne",
+    "channels",
     "drf_spectacular",
     "rest_framework_simplejwt.token_blacklist",
     "corsheaders",
@@ -31,7 +32,7 @@ THIRD_PATY_APPS = [
 
 LOCAL_APPS = ["apps.users", "apps.music"]
 
-INSTALLED_APPS = DJANGO_APPS + THIRD_PATY_APPS + LOCAL_APPS
+INSTALLED_APPS = THIRD_PARTY_APPS + DJANGO_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
@@ -81,6 +82,27 @@ DATABASES = {
     }
 }
 
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.s3.S3Storage",
+        "OPTIONS": {
+            "bucket_name": config("R2_BUCKET_NAME"),
+            "endpoint_url": config("R2_ENDPOINT_URL"),
+            "access_key": config("R2_ACCESS_KEY_ID"),
+            "secret_key": config("R2_SECRET_ACCESS_KEY"),
+            "region_name": "auto",
+            "signature_version": "s3v4",
+            "file_overwrite": False,
+            "default_acl": None,
+            "querystring_auth": True,
+            "querystring_expire": 900,
+        },
+    },
+    "staticfiles": {
+        "BACKEND": ("django.contrib.staticfiles.storage.StaticFilesStorage"),
+    },
+}
+
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels.layers.InMemoryChannelLayer",
@@ -125,12 +147,9 @@ REST_FRAMEWORK = {
         "rest_framework_simplejwt.authentication.JWTAuthentication",
         "rest_framework.authentication.SessionAuthentication",
     ],
-    "DEFAULT_THROTTLE_CLASSES": [
-        "rest_framework.throttling.AnonRateThrottle",  # only for anonim users
-    ],
     "DEFAULT_THROTTLE_RATES": {
-        "anon": "1000/m",  # anonims: 100 requests per day
-        "user": "1000/m",  # users: 1000 requests per minut
+        "anon": "60/minute",
+        "user": "100/minute",
     },
     "DEFAULT_RENDERER_CLASSES": [
         "rest_framework.renderers.JSONRenderer",  # JSON format
@@ -214,6 +233,3 @@ SPECTACULAR_SETTINGS = {
 }
 
 AUTH_USER_MODEL = "users.User"
-
-# django-hashid
-DJANGO_HASHIDS_SALT = SECRET_KEY

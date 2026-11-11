@@ -8,7 +8,6 @@ class Artist(models.Model):
         max_length=10,
         default=generate_short_uuid,
         unique=True,
-        db_index=True,
         editable=False,
     )
 

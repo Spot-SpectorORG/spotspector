@@ -44,4 +44,4 @@ class AlbumDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Album.objects.all().prefetch_related("artists")
     serializer_class = AlbumDetailSerializer
 
-    slug_field = "public_id"
+    lookup_field = "public_id"

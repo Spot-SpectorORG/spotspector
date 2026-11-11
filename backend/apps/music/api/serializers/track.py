@@ -3,6 +3,8 @@ from rest_framework import serializers
 from apps.music.models.track import Track
 from apps.music.models.artist import Artist
 
+from apps.music.services.validation import validate_audio_file
+
 from apps.music.api.serializers.auxiliary_serializers import (
     AlbumShortInfoSerializer,
     ArtistNameSerializer,
@@ -21,7 +23,7 @@ class TrackListSerializer(serializers.ModelSerializer):
             "artists",
             "album",
             "plays_count",
-            "duration",
+            "duration_ms",
         ]
 
 
@@ -37,10 +39,24 @@ class TrackCreateSerializer(serializers.ModelSerializer):
             "title",
             "artists",
             "album",
+            "audio_file",
             "genres",
-            "duration",
             "release_date",
         ]
+
+    def validate_audio_file(self, file):
+
+        file = validate_audio_file(file)
+
+        return file
+
+    def create(self, validated_data):
+        audio_file = validated_data.get("audio_file")
+
+        if audio_file and hasattr(audio_file, "extracted_duration_ms"):
+            validated_data["duration_ms"] = audio_file.extracted_duration_ms
+
+        return super().create(validated_data)
 
 
 class TrackDetailSerializer(serializers.ModelSerializer):
@@ -57,9 +73,9 @@ class TrackDetailSerializer(serializers.ModelSerializer):
             "genres",
             "plays_count",
             "track_position",
-            "duration",
+            "duration_ms",
         ]
-        read_only_fields = ["duration", "plays_count"]
+        read_only_fields = ["duration_ms", "plays_count"]
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
