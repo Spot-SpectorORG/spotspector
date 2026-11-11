@@ -3,7 +3,7 @@ from django.urls import path
 from apps.music.api.views.artist import ArtistDetailView, ArtistListView
 from apps.music.api.views.genre import GenreListView
 from apps.music.api.views.album import AlbumDetailView, AlbumListView
-from apps.music.api.views.track import TrackListView, TrackDetailView
+from apps.music.api.views.track import TrackListView, TrackDetailView, TrackStreamView
 from apps.music.api.views.playlist import PlaylistDetailView, PlaylistListView
 
 app_name = "music"
@@ -22,6 +22,9 @@ urlpatterns = [
     # Tracks
     path("tracks/", TrackListView.as_view(), name="tracks-list"),
     path("tracks/<str:public_id>/", TrackDetailView.as_view(), name="track-detail"),
+    path(
+        "tracks/<str:public_id>/stream/", TrackStreamView.as_view(), name="track-stream"
+    ),
     # Genres
     path("genres/", GenreListView.as_view(), name="genres-list"),
     # Playlists

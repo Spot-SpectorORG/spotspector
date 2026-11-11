@@ -3,6 +3,8 @@ from rest_framework import serializers
 from apps.music.models.track import Track
 from apps.music.models.artist import Artist
 
+from apps.music.services.validation import validate_audio_file
+
 from apps.music.api.serializers.auxiliary_serializers import (
     AlbumShortInfoSerializer,
     ArtistNameSerializer,
@@ -37,9 +39,24 @@ class TrackCreateSerializer(serializers.ModelSerializer):
             "title",
             "artists",
             "album",
+            "audio_file",
             "genres",
             "release_date",
         ]
+
+    def validate_audio_file(self, file):
+
+        file = validate_audio_file(file)
+
+        return file
+
+    def create(self, validated_data):
+        audio_file = validated_data.get("audio_file")
+
+        if audio_file and hasattr(audio_file, "extracted_duration_ms"):
+            validated_data["duration_ms"] = audio_file.extracted_duration_ms
+
+        return super().create(validated_data)
 
 
 class TrackDetailSerializer(serializers.ModelSerializer):
