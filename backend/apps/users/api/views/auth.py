@@ -33,6 +33,8 @@ class UserRegisterView(generics.CreateAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
+        user = serializer.save()
+
         refresh = RefreshToken.for_user(user)
 
         return Response(

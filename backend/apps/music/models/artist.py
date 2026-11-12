@@ -1,15 +1,28 @@
 from django.db import models
 
-from utils.models import generate_short_uuid
+from utils.models import (
+    ImageOptimizationMixin,
+    UploadToPath,
+    generate_short_uuid,
+)
 
 
-class Artist(models.Model):
+class Artist(ImageOptimizationMixin, models.Model):
+    image_size_config = {"avatar": (600, 600)}
+
     public_id = models.CharField(
         max_length=10,
         default=generate_short_uuid,
         unique=True,
-        db_index=True,
         editable=False,
+    )
+
+    avatar = models.ImageField(
+        upload_to=UploadToPath("images/artists"),
+        verbose_name="Artist avatar",
+        storage=ImageOptimizationMixin.get_image_storage,
+        blank=True,
+        null=True,
     )
 
     name = models.CharField(max_length=50, verbose_name="Artist name")

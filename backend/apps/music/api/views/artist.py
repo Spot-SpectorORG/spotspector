@@ -45,4 +45,4 @@ class ArtistDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     serializer_class = ArtistDetailSerializer
 
-    slug_field = "public_id"
+    lookup_field = "public_id"
