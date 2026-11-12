@@ -2,15 +2,29 @@ from django.contrib.auth.models import AbstractUser
 
 from django.db import models
 
-from utils.models import generate_short_uuid
+from utils.models import (
+    ImageOptimizationMixin,
+    UploadToPath,
+    generate_short_uuid,
+)
 
 
-class User(AbstractUser):
+class User(ImageOptimizationMixin, AbstractUser):
+    image_size_config = {"avatar": (400, 400)}
+
     public_id = models.CharField(
         max_length=10,
         default=generate_short_uuid,
         unique=True,
         editable=False,
+    )
+
+    avatar = models.ImageField(
+        upload_to=UploadToPath("images/users/"),
+        verbose_name="User avatar",
+        storage=ImageOptimizationMixin.get_image_storage,
+        blank=True,
+        null=True,
     )
 
     username = models.CharField(
