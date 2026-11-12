@@ -1,14 +1,26 @@
 from django.db import models
 
-from utils.models import generate_short_uuid
+from utils.models import ImageOptimizationMixin, UploadToPath, generate_short_uuid
 
 
-class Album(models.Model):
+class Album(ImageOptimizationMixin, models.Model):
+    image_fields_config = {
+        "cover": (1000, 1000),
+    }
+
     public_id = models.CharField(
         max_length=10,
         default=generate_short_uuid,
         unique=True,
         editable=False,
+    )
+
+    cover = models.ImageField(
+        upload_to=UploadToPath("images/albums/"),
+        verbose_name="Album cover",
+        storage=ImageOptimizationMixin.get_image_storage,
+        null=True,
+        blank=True,
     )
 
     title = models.CharField(max_length=100, blank=False, verbose_name="Title of album")

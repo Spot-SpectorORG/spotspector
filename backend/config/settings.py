@@ -86,7 +86,7 @@ STORAGES = {
     "default": {
         "BACKEND": "storages.backends.s3.S3Storage",
         "OPTIONS": {
-            "bucket_name": config("R2_BUCKET_NAME"),
+            "bucket_name": config("R2_MUSIC_BUCKET_NAME"),
             "endpoint_url": config("R2_ENDPOINT_URL"),
             "access_key": config("R2_ACCESS_KEY_ID"),
             "secret_key": config("R2_SECRET_ACCESS_KEY"),
@@ -96,6 +96,21 @@ STORAGES = {
             "default_acl": None,
             "querystring_auth": True,
             "querystring_expire": 900,
+        },
+    },
+    "public_media": {
+        "BACKEND": "storages.backends.s3.S3Storage",
+        "OPTIONS": {
+            "bucket_name": config("R2_IMAGE_BUCKET_NAME"),
+            "endpoint_url": config("R2_ENDPOINT_URL"),
+            "access_key": config("R2_ACCESS_KEY_ID"),
+            "secret_key": config("R2_SECRET_ACCESS_KEY"),
+            "custom_domain": config("R2_PUBLIC_DOMAIN"),
+            "region_name": "auto",
+            "signature_version": "s3v4",
+            "file_overwrite": False,
+            "default_acl": None,
+            "querystring_auth": False,
         },
     },
     "staticfiles": {

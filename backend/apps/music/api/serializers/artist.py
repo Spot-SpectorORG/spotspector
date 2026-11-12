@@ -13,7 +13,7 @@ class ArtistListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Artist
-        fields = ["public_id", "name", "genres"]
+        fields = ["public_id", "name", "genres", "avatar"]
 
 
 class ArtistCreateSerializer(serializers.ModelSerializer):
@@ -21,7 +21,7 @@ class ArtistCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Artist
-        fields = ["public_id", "name", "genres"]
+        fields = ["public_id", "name", "genres", "avatar"]
 
 
 class ArtistDetailSerializer(serializers.ModelSerializer):
@@ -31,6 +31,6 @@ class ArtistDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Artist
-        fields = ["public_id", "name", "followers", "genres", "albums"]
+        fields = ["public_id", "name", "followers", "genres", "albums", "avatar"]
 
         read_only_fields = ["followers"]

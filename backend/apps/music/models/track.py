@@ -1,7 +1,7 @@
 from django.db import models
 
 
-from utils.models import generate_short_uuid, track_audio_upload_to
+from utils.models import UploadToPath, generate_short_uuid
 
 
 class Track(models.Model):
@@ -54,7 +54,9 @@ class Track(models.Model):
     )
 
     audio_file = models.FileField(
-        upload_to=track_audio_upload_to, max_length=512, null=True
+        upload_to=UploadToPath("tracks/"),
+        max_length=512,
+        null=True,
     )
 
     class Meta:
