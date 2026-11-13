@@ -2,8 +2,13 @@
 import logoIcon from '../../images/spotspector-icon.svg'
 import authorLogo from '../../images/author-logo.png'
 import authorLogo2 from '../../images/author-logo2.png'
+import LoginForm from '../features/auth/LoginUser'
+import { useAuthStore } from '../features/auth/authStore'
+import {useState} from 'react'
 
-function Navbar() {
+function Navbar({onOpenLogin}: {onOpenLogin: () => void}) {
+  const { isAuth, logout } = useAuthStore()
+
   return (
     <div className="navbar">
       <div className="nav">
@@ -17,13 +22,17 @@ function Navbar() {
           <a href="">Contact</a>
         </div>
 
-        <button className="login-btn">Log in</button>
+        {isAuth ? <button className="login-btn" onClick={logout}>Log out</button> : <button className="login-btn" onClick={onOpenLogin}>Log in</button> }
        </div>
      </div>
    )
 }
 
 function Hero() {
+  const handleScroll = () => {
+    document.getElementById('albums')?.scrollIntoView({behavior: 'smooth'})
+  }
+
   return (
     <section className="hero">
       <div className="hero-parent">
@@ -49,7 +58,7 @@ function Hero() {
         </div>
       </div>
 
-      <button className="enjoy">Join & Enjoy</button>
+      <button className="enjoy" onClick={handleScroll}>Join & Enjoy</button>
     </section>
   )
 }
@@ -61,27 +70,27 @@ function Artists() {
 
       <div className="artist-container">
         <a href="">
-          <img src="" alt="" />
+          <img src={undefined} alt="" />
           <p>1</p>
         </a>
         <a href="">
-          <img src="" alt="" />
+          <img src={undefined} alt="" />
           <p>2</p>
         </a>
         <a href="">
-          <img src="" alt="" />
+          <img src={undefined} alt="" />
           <p>3</p>
         </a>
         <a href="">
-          <img src="" alt="" />
+          <img src={undefined} alt="" />
           <p>4</p>
         </a>
         <a href="">
-          <img src="" alt="" />
+          <img src={undefined} alt="" />
           <p>5</p>
         </a>
         <a href="">
-          <img src="" alt="" />
+          <img src={undefined} alt="" />
           <p>6</p>
         </a>
       </div>
@@ -91,24 +100,24 @@ function Artists() {
 
 function Albums() {
   return (
-    <section className="albums">
+    <section className="albums" id="albums">
       <h2>Albums</h2>
 
       <div className="album-container">
         <a href="">
-          <img src="" alt="" />
+          <img src={undefined} alt="" />
           <p>album1</p>
         </a>
         <a href="">
-          <img src="" alt="" />
+          <img src={undefined} alt="" />
           <p>album2</p>
         </a>
         <a href="">
-          <img src="" alt="" />
+          <img src={undefined} alt="" />
           <p>album3</p>
         </a>
         <a href="">
-          <img src="" alt="" />
+          <img src={undefined} alt="" />
           <p>album4</p>
         </a>
       </div>
@@ -118,12 +127,17 @@ function Albums() {
 
 
 export default function RenderLandingPage() {
+  const [isOpen, setIsOpen] = useState(false);
+  const isAuth = useAuthStore((state) => state.isAuth)
+
   return (
     <div className="children">
-    <Navbar />
+      <Navbar onOpenLogin={() => setIsOpen(true)}/>
     <Hero/>
     <Artists />
-    <Albums/>
+      <Albums />
+      {isOpen && !isAuth && <LoginForm onClose={() => setIsOpen(false)} />}
+
     </div>
   )
 }
