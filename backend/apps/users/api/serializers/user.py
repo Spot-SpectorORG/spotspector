@@ -40,8 +40,7 @@ class UserPublicProfileSerializer(serializers.ModelSerializer):
 class UserPublicDetailProfileSerializer(serializers.ModelSerializer):
     followed_artists = UserFollowedArtistsSerializer(many=True, read_only=True)
     friends = UserFriendsSerializer(many=True, read_only=True)
-
-    owned_playlists = serializers.SerializerMethodField()
+    owned_playlists = UserOwnedPlaylistsSerializer(many=True, read_only=True)
 
     class Meta:
         model = User
@@ -54,18 +53,11 @@ class UserPublicDetailProfileSerializer(serializers.ModelSerializer):
             "owned_playlists",
         ]
 
-    @extend_schema_field(UserOwnedPlaylistsSerializer(many=True))
-    def get_owned_playlists(self, obj):
-
-        public_playlists = obj.owned_playlists.filter(visibility=Playlist.Status.PUBLIC)
-
-        return UserOwnedPlaylistsSerializer(public_playlists, many=True).data
-
 
 class UserPrivateProfileSerializer(serializers.ModelSerializer):
-    owned_playlists = serializers.SerializerMethodField()
     friends = UserFriendsSerializer(many=True, read_only=True)
     followed_artists = UserFollowedArtistsSerializer(many=True, read_only=True)
+    owned_playlists = UserOwnedPlaylistsSerializer(many=True, read_only=True)
 
     class Meta:
         model = User
@@ -79,8 +71,4 @@ class UserPrivateProfileSerializer(serializers.ModelSerializer):
             "date_joined",
         ]
 
-    @extend_schema_field(UserOwnedPlaylistsSerializer(many=True))
-    def get_owned_playlists(self, obj):
-        all_my_playlists = obj.owned_playlists.all()
-
-        return UserOwnedPlaylistsSerializer(all_my_playlists, many=True).data
+        read_only_fields = ["date_joined"]

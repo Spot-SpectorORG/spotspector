@@ -19,7 +19,7 @@ def get_playlists_by_owner(requesting_user, owner_id):
     else:
         queryset = queryset.filter(visibility=Playlist.Status.PUBLIC)
 
-    return queryset
+    return queryset.select_related("owner").prefetch_related("genres")
 
 
 def get_playlist_by_permission(user, playlist):

@@ -20,7 +20,7 @@ from apps.music.api.pagination.artist import ArtistListPagination
 
 @extend_schema(tags=["Music Catalog - Artists"])
 class ArtistListView(generics.ListCreateAPIView):
-    queryset = Artist.objects.all()
+    queryset = Artist.objects.all().prefetch_related("genres")
 
     filter_backends = [
         DjangoFilterBackend,
@@ -41,7 +41,7 @@ class ArtistListView(generics.ListCreateAPIView):
 
 @extend_schema(tags=["Music Catalog - Artists"])
 class ArtistDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Artist.objects.all()
+    queryset = Artist.objects.all().prefetch_related("genres", "albums")
 
     serializer_class = ArtistDetailSerializer
 
