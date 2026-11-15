@@ -20,6 +20,7 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
+    "debug_toolbar",
     "storages",
     "daphne",
     "channels",
@@ -35,6 +36,7 @@ LOCAL_APPS = ["apps.users", "apps.music"]
 INSTALLED_APPS = THIRD_PARTY_APPS + DJANGO_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -50,6 +52,10 @@ ROOT_URLCONF = "config.urls"
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+]
+
+INTERNAL_IPS = [
+    "127.0.0.1",
 ]
 
 TEMPLATES = [
