@@ -13,7 +13,7 @@ class AlbumListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Album
-        fields = ["public_id", "title", "artists", "release_date"]
+        fields = ["public_id", "title", "artists", "cover", "release_date"]
 
 
 class AlbumCreateSerializer(serializers.ModelSerializer):
@@ -23,7 +23,7 @@ class AlbumCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Album
-        fields = ["public_id", "title", "artists", "release_date"]
+        fields = ["public_id", "title", "artists", "cover", "release_date"]
 
 
 class TrackInfoInsideAlbumSerializer(serializers.ModelSerializer):
@@ -48,4 +48,4 @@ class AlbumDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Album
-        fields = ["public_id", "title", "artists", "tracks", "release_date"]
+        fields = ["public_id", "title", "artists", "tracks", "cover", "release_date"]
