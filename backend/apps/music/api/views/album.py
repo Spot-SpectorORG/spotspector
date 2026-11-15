@@ -7,7 +7,10 @@ from rest_framework.response import Response
 
 from django_filters.rest_framework import DjangoFilterBackend
 
+from django.db.models import Prefetch
+
 from apps.music.models.album import Album
+from apps.music.models.track import Track
 
 from apps.music.api.serializers.album import (
     AlbumListSerializer,
@@ -20,7 +23,7 @@ from apps.music.api.pagination.album import AlbumListPagination
 
 @extend_schema(tags=["Music Catalog - Albums"])
 class AlbumListView(generics.ListCreateAPIView):
-    queryset = Album.objects.all()
+    queryset = Album.objects.all().prefetch_related("artists")
 
     filter_backends = [
         DjangoFilterBackend,
@@ -41,7 +44,15 @@ class AlbumListView(generics.ListCreateAPIView):
 
 @extend_schema(tags=["Music Catalog - Albums"])
 class AlbumDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Album.objects.all().prefetch_related("artists")
+    queryset = Album.objects.all().prefetch_related(
+        "artists",
+        Prefetch(
+            "tracks",
+            queryset=Track.objects.order_by("track_position").prefetch_related(
+                "genres"
+            ),
+        ),
+    )
     serializer_class = AlbumDetailSerializer
 
     lookup_field = "public_id"

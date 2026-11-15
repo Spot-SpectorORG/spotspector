@@ -1,5 +1,7 @@
 from django.shortcuts import get_object_or_404
 
+from rest_framework.exceptions import NotFound
+
 from math import ceil
 
 from apps.music.models.track import Track
@@ -7,8 +9,14 @@ from apps.music.models.track import Track
 from apps.music.services.track import update_track_plays_count
 
 
-def get_track_stream_url(public_id):
-    track = get_object_or_404(Track, public_id=public_id)
+def get_track_stream_url(public_id) -> tuple[str, int] | None:
+    track = get_object_or_404(
+        Track.objects.only("id", "duration_ms", "audio_file"),
+        public_id=public_id,
+    )
+
+    if not track.audio_file:
+        raise NotFound("Audio file for this track is not available.")
 
     update_track_plays_count(track)
 

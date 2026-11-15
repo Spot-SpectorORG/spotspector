@@ -4,6 +4,8 @@ from django.urls import include, path
 
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
+from config import settings
+
 urlpatterns = [
     path("admin/", admin.site.urls),  # the admin panel
     path(
@@ -18,3 +20,8 @@ urlpatterns = [
     ),  # the Swagger UI
     path("api/v1/", include("apps.api_urls")),  # the API
 ]
+
+if settings.DEBUG:
+    urlpatterns += [
+        path("__debug__/", include("debug_toolbar.urls")),
+    ]

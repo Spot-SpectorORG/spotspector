@@ -28,20 +28,16 @@ class PlaylistUserSerializer(serializers.ModelSerializer):
 
 class PlaylistListSerializer(serializers.ModelSerializer):
     owner = PlaylistUserSerializer(read_only=True)
-    collaborators = PlaylistUserSerializer(many=True, read_only=True)
-    genres = GenreTypeSerializer(many=True, read_only=True)
-    tracks = TrackInfoInsidePlaylistSerializer(many=True, read_only=True)
+    genres = GenreTypeSerializer(many=True)
 
     class Meta:
         model = Playlist
         fields = [
             "public_id",
+            "owner",
             "title",
             "description",
-            "owner",
-            "collaborators",
             "genres",
-            "tracks",
             "visibility",
             "saves_count",
         ]
@@ -93,3 +89,5 @@ class PlaylistDetailSerializer(serializers.ModelSerializer):
             "visibility",
             "saves_count",
         ]
+
+        read_only_fields = ["saves_count"]

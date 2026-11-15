@@ -27,7 +27,7 @@ from apps.music.selectors.track import get_track_stream_url
 
 @extend_schema(tags=["Music Catalog - Tracks"])
 class TrackListView(generics.ListCreateAPIView):
-    queryset = Track.objects.all()
+    queryset = Track.objects.all().select_related("album").prefetch_related("artists")
 
     filter_backends = [
         DjangoFilterBackend,
@@ -50,7 +50,14 @@ class TrackListView(generics.ListCreateAPIView):
 
 @extend_schema(tags=["Music Catalog - Tracks"])
 class TrackDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Track.objects.all()
+    queryset = (
+        Track.objects.all()
+        .select_related("album")
+        .prefetch_related(
+            "genres",
+            "artists",
+        )
+    )
 
     serializer_class = TrackDetailSerializer
 

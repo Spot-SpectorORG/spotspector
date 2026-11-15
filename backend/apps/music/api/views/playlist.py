@@ -46,15 +46,15 @@ class PlaylistListView(generics.ListCreateAPIView):
 
 @extend_schema(tags=["User Playlists & Libraries"])
 class PlaylistDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Playlist.objects.all()
+    queryset = (
+        Playlist.objects.all()
+        .select_related("owner")
+        .prefetch_related("tracks__artists", "genres", "collaborators")
+    )
+
+    serializer_class = PlaylistDetailSerializer
 
     lookup_field = "public_id"
-
-    def get_serializer_class(self):
-        if self.request.method in ["PUT", "PATCH"]:
-            return PlaylistCreateSerializer
-
-        return PlaylistDetailSerializer
 
     def get_object(self):
         playlist = super().get_object()
