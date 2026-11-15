@@ -17,10 +17,11 @@ class Playlist(models.Model):
 
     owner = models.ForeignKey(
         "users.User",
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         related_name="owned_playlists",
         verbose_name="Owner of playlist",
-        blank=False,
+        blank=True,
+        null=True,
     )
 
     collaborators = models.ManyToManyField(
