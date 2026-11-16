@@ -6,6 +6,12 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 from config import settings
 
+from django.contrib import admin
+
+admin.site.site_title = "Spotspector Admin"
+admin.site.site_header = "Spotspector Admin Panel"
+admin.site.index_title = "Welcome To Spotspector Admin"
+
 urlpatterns = [
     path("admin/", admin.site.urls),  # the admin panel
     path(

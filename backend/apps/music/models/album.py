@@ -45,4 +45,4 @@ class Album(ImageOptimizationMixin, models.Model):
         db_table = "albums"
 
     def __str__(self):
-        return self.title
+        return f"{self.title} - {self.release_date}"

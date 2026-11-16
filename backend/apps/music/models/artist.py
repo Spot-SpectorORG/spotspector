@@ -38,6 +38,8 @@ class Artist(ImageOptimizationMixin, models.Model):
         blank=False,
     )
 
+    foundation_date = models.DateField(verbose_name="Date of foundation", blank=False)
+
     class Meta:
         verbose_name = "Artist"
         verbose_name_plural = "Artists"
