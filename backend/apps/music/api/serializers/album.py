@@ -1,11 +1,10 @@
-from rest_framework import serializers
-
+from apps.music.api.serializers.auxiliary_serializers import \
+    ArtistNameSerializer
+from apps.music.api.serializers.genre import GenreTypeSerializer
 from apps.music.models.album import Album
 from apps.music.models.artist import Artist
 from apps.music.models.track import Track
-
-from apps.music.api.serializers.auxiliary_serializers import ArtistNameSerializer
-from apps.music.api.serializers.genre import GenreTypeSerializer
+from rest_framework import serializers
 
 
 class AlbumListSerializer(serializers.ModelSerializer):

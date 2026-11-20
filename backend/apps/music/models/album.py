@@ -1,6 +1,6 @@
 from django.db import models
-
-from utils.models import ImageOptimizationMixin, UploadToPath, generate_short_uuid
+from utils.models import (ImageOptimizationMixin, UploadToPath,
+                          generate_short_uuid)
 
 
 class Album(ImageOptimizationMixin, models.Model):

@@ -1,12 +1,7 @@
-from django.contrib import admin
-
-from django.urls import include, path
-
-from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
-
 from config import settings
-
 from django.contrib import admin
+from django.urls import include, path
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 admin.site.site_title = "Spotspector Admin"
 admin.site.site_header = "Spotspector Admin Panel"

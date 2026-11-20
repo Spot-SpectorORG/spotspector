@@ -1,7 +1,6 @@
-from rest_framework import serializers
-
 from apps.music.models.album import Album
 from apps.music.models.artist import Artist
+from rest_framework import serializers
 
 
 class ArtistNameSerializer(serializers.ModelSerializer):

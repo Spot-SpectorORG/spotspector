@@ -1,13 +1,9 @@
-from rest_framework import serializers
-
-from apps.music.models import Playlist
-from apps.music.models import Track
-from apps.music.models import Genre
-
+from apps.music.api.serializers.auxiliary_serializers import \
+    ArtistNameSerializer
 from apps.music.api.serializers.genre import GenreTypeSerializer
-from apps.music.api.serializers.auxiliary_serializers import ArtistNameSerializer
-
+from apps.music.models import Genre, Playlist, Track
 from django.contrib.auth import get_user_model
+from rest_framework import serializers
 
 User = get_user_model()
 

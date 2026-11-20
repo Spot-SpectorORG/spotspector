@@ -1,26 +1,15 @@
-from django.db.models import Prefetch
-from django.db.models import prefetch_related_objects
-
-from django.contrib.auth import get_user_model
-from django_filters.rest_framework import DjangoFilterBackend
-
-from drf_spectacular.utils import extend_schema
-
-from rest_framework import generics
-from rest_framework.permissions import IsAuthenticated
-
-from rest_framework.filters import OrderingFilter, SearchFilter
-
-
-from apps.users.api.serializers.user import (
-    UserPublicDetailProfileSerializer,
-    UserPublicProfileSerializer,
-    UserPrivateProfileSerializer,
-)
-
-from apps.users.api.pagination.user import UserListPagination
-
 from apps.music.models.playlist import Playlist
+from apps.users.api.pagination.user import UserListPagination
+from apps.users.api.serializers.user import (UserPrivateProfileSerializer,
+                                             UserPublicDetailProfileSerializer,
+                                             UserPublicProfileSerializer)
+from django.contrib.auth import get_user_model
+from django.db.models import Prefetch, prefetch_related_objects
+from django_filters.rest_framework import DjangoFilterBackend
+from drf_spectacular.utils import extend_schema
+from rest_framework import generics
+from rest_framework.filters import OrderingFilter, SearchFilter
+from rest_framework.permissions import IsAuthenticated
 
 User = get_user_model()
 

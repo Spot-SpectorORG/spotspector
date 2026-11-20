@@ -1,10 +1,10 @@
-from django.urls import path
-
+from apps.music.api.views.album import AlbumDetailView, AlbumListView
 from apps.music.api.views.artist import ArtistDetailView, ArtistListView
 from apps.music.api.views.genre import GenreListView
-from apps.music.api.views.album import AlbumDetailView, AlbumListView
-from apps.music.api.views.track import TrackListView, TrackDetailView, TrackStreamView
 from apps.music.api.views.playlist import PlaylistDetailView, PlaylistListView
+from apps.music.api.views.track import (TrackDetailView, TrackListView,
+                                        TrackStreamView)
+from django.urls import path
 
 app_name = "music"
 

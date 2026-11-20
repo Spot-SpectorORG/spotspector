@@ -1,28 +1,17 @@
-from drf_spectacular.utils import extend_schema
-
-from rest_framework import generics, status
-
-from rest_framework.permissions import AllowAny
-
-from rest_framework.views import APIView
-
-from rest_framework.filters import OrderingFilter, SearchFilter
-from rest_framework.response import Response
-from rest_framework.parsers import MultiPartParser, FormParser
-
-from django_filters.rest_framework import DjangoFilterBackend
-
-from apps.music.models.track import Track
-
-from apps.music.api.serializers.track import (
-    TrackListSerializer,
-    TrackCreateSerializer,
-    TrackDetailSerializer,
-)
-
-
 from apps.music.api.pagination.track import TrackListPagination
+from apps.music.api.serializers.track import (TrackCreateSerializer,
+                                              TrackDetailSerializer,
+                                              TrackListSerializer)
+from apps.music.models.track import Track
 from apps.music.selectors.track import get_track_stream_url
+from django_filters.rest_framework import DjangoFilterBackend
+from drf_spectacular.utils import extend_schema
+from rest_framework import generics, status
+from rest_framework.filters import OrderingFilter, SearchFilter
+from rest_framework.parsers import FormParser, MultiPartParser
+from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 
 @extend_schema(tags=["Music Catalog - Tracks"])

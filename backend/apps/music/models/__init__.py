@@ -1,5 +1,5 @@
-from .artist import *
 from .album import *
-from .track import *
+from .artist import *
 from .genre import *
 from .playlist import *
+from .track import *

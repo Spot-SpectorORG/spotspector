@@ -1,6 +1,4 @@
 from django.db import models
-
-
 from utils.models import UploadToPath, generate_short_uuid
 
 

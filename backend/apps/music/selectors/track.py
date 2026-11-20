@@ -1,12 +1,9 @@
-from django.shortcuts import get_object_or_404
-
-from rest_framework.exceptions import NotFound
-
 from math import ceil
 
 from apps.music.models.track import Track
-
 from apps.music.services.track import update_track_plays_count
+from django.shortcuts import get_object_or_404
+from rest_framework.exceptions import NotFound
 
 
 def get_track_stream_url(public_id) -> tuple[str, int] | None:

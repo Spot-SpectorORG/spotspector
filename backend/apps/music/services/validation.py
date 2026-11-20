@@ -1,7 +1,6 @@
 import os
 
 from mutagen import File as MutagenFile
-
 from rest_framework.serializers import ValidationError
 
 

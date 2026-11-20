@@ -1,14 +1,9 @@
-from rest_framework import serializers
-
-from apps.music.models.track import Track
-from apps.music.models.artist import Artist
-
-from apps.music.services.validation import validate_audio_file
-
 from apps.music.api.serializers.auxiliary_serializers import (
-    AlbumShortInfoSerializer,
-    ArtistNameSerializer,
-)
+    AlbumShortInfoSerializer, ArtistNameSerializer)
+from apps.music.models.artist import Artist
+from apps.music.models.track import Track
+from apps.music.services.validation import validate_audio_file
+from rest_framework import serializers
 
 
 class TrackListSerializer(serializers.ModelSerializer):

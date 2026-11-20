@@ -1,9 +1,7 @@
 from io import BytesIO
-
 from pathlib import Path
 
 from django.core.files.uploadedfile import InMemoryUploadedFile
-
 from PIL import Image, ImageOps
 
 

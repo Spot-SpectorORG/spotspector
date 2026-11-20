@@ -1,24 +1,15 @@
-from drf_spectacular.utils import extend_schema
-
-from rest_framework import generics, status
-
-from rest_framework.filters import OrderingFilter, SearchFilter
-from rest_framework.response import Response
-
-from django_filters.rest_framework import DjangoFilterBackend
-
-from django.db.models import Prefetch
-
+from apps.music.api.pagination.album import AlbumListPagination
+from apps.music.api.serializers.album import (AlbumCreateSerializer,
+                                              AlbumDetailSerializer,
+                                              AlbumListSerializer)
 from apps.music.models.album import Album
 from apps.music.models.track import Track
-
-from apps.music.api.serializers.album import (
-    AlbumListSerializer,
-    AlbumCreateSerializer,
-    AlbumDetailSerializer,
-)
-
-from apps.music.api.pagination.album import AlbumListPagination
+from django.db.models import Prefetch
+from django_filters.rest_framework import DjangoFilterBackend
+from drf_spectacular.utils import extend_schema
+from rest_framework import generics, status
+from rest_framework.filters import OrderingFilter, SearchFilter
+from rest_framework.response import Response
 
 
 @extend_schema(tags=["Music Catalog - Albums"])

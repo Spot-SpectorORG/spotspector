@@ -1,6 +1,5 @@
-from rest_framework import serializers
-
 from apps.music.models.genre import Genre
+from rest_framework import serializers
 
 
 class GenreTypeSerializer(serializers.ModelSerializer):

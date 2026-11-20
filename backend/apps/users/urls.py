@@ -1,8 +1,7 @@
-from django.urls import path
-
 from apps.users.api.views.auth import UserLoginView, UserRegisterView
-
-from apps.users.api.views.user import MeProfileView, UserListView, UserDetailView
+from apps.users.api.views.user import (MeProfileView, UserDetailView,
+                                       UserListView)
+from django.urls import path
 
 app_name = "users"
 

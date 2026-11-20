@@ -1,6 +1,5 @@
-from django.core.exceptions import PermissionDenied
-
 from apps.music.models.playlist import Playlist
+from django.core.exceptions import PermissionDenied
 
 
 def get_playlists_by_owner(requesting_user, owner_id):

@@ -1,12 +1,7 @@
 from django.contrib.auth.models import AbstractUser
-
 from django.db import models
-
-from utils.models import (
-    ImageOptimizationMixin,
-    UploadToPath,
-    generate_short_uuid,
-)
+from utils.models import (ImageOptimizationMixin, UploadToPath,
+                          generate_short_uuid)
 
 
 class User(ImageOptimizationMixin, AbstractUser):

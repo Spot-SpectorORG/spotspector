@@ -1,26 +1,15 @@
+from apps.music.api.pagination.playlist import PlaylistListPagination
+from apps.music.api.serializers.playlist import (PlaylistCreateSerializer,
+                                                 PlaylistDetailSerializer,
+                                                 PlaylistListSerializer)
+from apps.music.models.playlist import Playlist
+from apps.music.selectors.playlist import (get_playlist_by_permission,
+                                           get_playlists_by_owner)
+from django_filters.rest_framework import DjangoFilterBackend
 from drf_spectacular.utils import extend_schema
-
 from rest_framework import generics, status
-
 from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.response import Response
-
-from django_filters.rest_framework import DjangoFilterBackend
-
-from apps.music.models.playlist import Playlist
-
-from apps.music.api.serializers.playlist import (
-    PlaylistCreateSerializer,
-    PlaylistDetailSerializer,
-    PlaylistListSerializer,
-)
-
-from apps.music.api.pagination.playlist import PlaylistListPagination
-
-from apps.music.selectors.playlist import (
-    get_playlists_by_owner,
-    get_playlist_by_permission,
-)
 
 
 @extend_schema(tags=["User Playlists & Libraries"])

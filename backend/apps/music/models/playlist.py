@@ -1,5 +1,4 @@
 from django.db import models
-
 from utils.models import generate_short_uuid
 
 

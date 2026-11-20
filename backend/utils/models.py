@@ -1,14 +1,10 @@
-import shortuuid
+from pathlib import Path
 from uuid import uuid4
 
-from pathlib import Path
-
-from django.utils.deconstruct import deconstructible
-
-from django.db import models
-
+import shortuuid
 from django.core.files.storage import storages
-
+from django.db import models
+from django.utils.deconstruct import deconstructible
 from utils.images import compress_image_to_webp
 
 

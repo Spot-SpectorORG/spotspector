@@ -1,16 +1,10 @@
-from drf_spectacular.utils import extend_schema
-
-from rest_framework import generics, status
-
-from rest_framework.filters import OrderingFilter, SearchFilter
-
-from rest_framework.response import Response
-
-from django_filters.rest_framework import DjangoFilterBackend
-
-from apps.music.models.genre import Genre
-
 from apps.music.api.serializers.genre import GenreListCreateSerializer
+from apps.music.models.genre import Genre
+from django_filters.rest_framework import DjangoFilterBackend
+from drf_spectacular.utils import extend_schema
+from rest_framework import generics, status
+from rest_framework.filters import OrderingFilter, SearchFilter
+from rest_framework.response import Response
 
 
 @extend_schema(tags=["Music Catalog - Genres"])

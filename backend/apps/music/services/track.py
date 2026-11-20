@@ -1,5 +1,4 @@
 from apps.music.models.track import Track
-
 from django.db.models import F
 
 
