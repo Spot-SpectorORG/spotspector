@@ -566,7 +566,7 @@ h1 {
 }
 
 .submit-btn:active {
-  transform: scale(0.98);
+  transform: scale(1);
 }
  }
 
@@ -644,11 +644,9 @@ h1 {
    text-align: center;
    white-space: nowrap;
    overflow: hidden;
-   text-overflow: ellipsis;
    max-width: 100%;
  }
 
- /* Адаптив для планшетов и телефонов */
  @media (max-width: 1024px) {
    .artists-list {
      grid-template-columns: repeat(3, minmax(0, 1fr));
