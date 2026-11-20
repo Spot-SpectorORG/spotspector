@@ -3,6 +3,7 @@ import logoIcon from '../../images/spotspector-icon.svg'
 import authorLogo from '../../images/author-logo.png'
 import authorLogo2 from '../../images/author-logo2.png'
 import LoginForm from '../features/auth/LoginUser'
+import {Artists} from '../enties/artist/ArtistsBlock'
 import { useAuthStore } from '../features/auth/authStore'
 import {useState} from 'react'
 
@@ -63,40 +64,40 @@ function Hero() {
   )
 }
 
-function Artists() {
-  return (
-    <section className="artists">
-      <h2>Popular Artists</h2>
+// function Artists() {
+//   return (
+//     <section className="artists">
+//       <h2>Popular Artists</h2>
 
-      <div className="artist-container">
-        <a href="">
-          <img src={undefined} alt="" />
-          <p>1</p>
-        </a>
-        <a href="">
-          <img src={undefined} alt="" />
-          <p>2</p>
-        </a>
-        <a href="">
-          <img src={undefined} alt="" />
-          <p>3</p>
-        </a>
-        <a href="">
-          <img src={undefined} alt="" />
-          <p>4</p>
-        </a>
-        <a href="">
-          <img src={undefined} alt="" />
-          <p>5</p>
-        </a>
-        <a href="">
-          <img src={undefined} alt="" />
-          <p>6</p>
-        </a>
-      </div>
-    </section>
-  )
-}
+//       <div className="artist-container">
+//         <a href="">
+//           <img src={undefined} alt="" />
+//           <p>1</p>
+//         </a>
+//         <a href="">
+//           <img src={undefined} alt="" />
+//           <p>2</p>
+//         </a>
+//         <a href="">
+//           <img src={undefined} alt="" />
+//           <p>3</p>
+//         </a>
+//         <a href="">
+//           <img src={undefined} alt="" />
+//           <p>4</p>
+//         </a>
+//         <a href="">
+//           <img src={undefined} alt="" />
+//           <p>5</p>
+//         </a>
+//         <a href="">
+//           <img src={undefined} alt="" />
+//           <p>6</p>
+//         </a>
+//       </div>
+//     </section>
+//   )
+// }
 
 function Albums() {
   return (
