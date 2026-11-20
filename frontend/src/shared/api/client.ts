@@ -1,4 +1,4 @@
-const BASE_URL = '/api/v1';
+export const BASE_URL = '/api/v1';
 
 type LoginInput = {
   username: string;
